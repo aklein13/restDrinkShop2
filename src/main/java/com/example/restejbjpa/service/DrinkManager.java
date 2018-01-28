@@ -27,16 +27,9 @@ public class DrinkManager {
   }
 
   public List<Drink> init() {
-    List<Buyer> buyers = new ArrayList<>();
-    Company c1 = new Company("Pepsi Company", "USA");
-    Company c2 = new Company("Koca-Kola", "China");
-    Buyer b1 = new Buyer("Stefan", "Kowalski", 22);
-    Buyer b2 = new Buyer("Stefan", "Nowak", 20);
-    buyers.add(b1);
-    buyers.add(b2);
-    Drink d1 = new Drink("Pepsi", 5.5, 10, c1, b1);
-    Drink d2 = new Drink("Sprite", 15.1, 100, c2, buyers);
-    Drink d3 = new Drink("Cola", 21.3, 5, c2, b2);
+    Drink d1 = new Drink("Pepsi", 5.5, 10);
+    Drink d2 = new Drink("Sprite", 15.1, 100);
+    Drink d3 = new Drink("Cola", 21.3, 5);
     addDrink(d1);
     addDrink(d2);
     addDrink(d3);

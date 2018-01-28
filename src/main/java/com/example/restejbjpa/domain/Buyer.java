@@ -23,7 +23,7 @@ public class Buyer {
   public String lastName;
   public int age;
 
-  @ManyToMany(mappedBy = "buyers", fetch = FetchType.EAGER)
+  @ManyToMany(cascade = CascadeType.ALL, mappedBy = "buyers", fetch = FetchType.EAGER)
   public List<Drink> drinks = new ArrayList<>();
 
   public Buyer(String firstName, String lastName, int age, List<Drink> drinks) {
