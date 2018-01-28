@@ -38,21 +38,41 @@ public class DrinkRestTest {
     RestAssured.basePath = "/restejbjpa/api";
   }
 
+  public void clearDrinks() {
+    delete("/drink").then();
+  }
+
+  public void sendDrink(Drink drink) {
+    given().
+        contentType(MediaType.APPLICATION_JSON).
+        body(drink).
+        when().
+        post("/drink").then();
+  }
+
+  public int getSize() {
+    return get("/drink").then().extract().jsonPath().getList("$").size();
+  }
+
+  @Test
+  public void addSimpleDrink() {
+    clearDrinks();
+    Drink d1 = new Drink(NAME, PRICE, AMOUNT);
+    sendDrink(d1);
+    assertEquals(1, getSize());
+  }
+
   @Test
   public void deleteAll() {
     Drink d1 = new Drink(NAME, PRICE, AMOUNT, null, null);
-    given().contentType(MediaType.APPLICATION_JSON)
-        .body(d1)
-        .when()
-        .post("/drink");
+    sendDrink(d1);
     delete("/drink").then().assertThat().statusCode(200);
-    int size = get("/drink").then().extract().jsonPath().getList("$").size();
-    assertEquals(0, size);
+    assertEquals(0, getSize());
   }
 
   @Test
   public void addDrink() {
-    delete("/drink").then();
+    clearDrinks();
     get("/drink").then().assertThat().statusCode(200);
     Company c1 = new Company(NAME, COUNTRY);
     Buyer b1 = new Buyer(NAME, NAME2, AGE);
@@ -78,6 +98,18 @@ public class DrinkRestTest {
         "company.name", equalTo(NAME),
         "company.country", equalTo(COUNTRY)
     );
+  }
+
+  @Test
+  public void searchByName() {
+    clearDrinks();
+    Drink d1 = new Drink(NAME, PRICE, AMOUNT);
+    Drink d2 = new Drink(NAME2, PRICE, AMOUNT);
+    sendDrink(d2);
+    sendDrink(d1);
+    ValidatableResponse response = get("/drink/query/name/" + NAME).then();
+    response.assertThat().statusCode(200);
+    response.body("[0].name", equalTo(NAME));
   }
 
 }
