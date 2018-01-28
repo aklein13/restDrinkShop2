@@ -50,37 +50,27 @@ public class DrinkManager {
       switch (temp.getKey().toString()) {
         case "minPrice":
           for (Drink drink : drinkList) {
-            if (drink.getPrice() < Double.parseDouble(temp.getValue().toString())) {
-              output.remove(drink);
-            }
+            if (drink.getPrice() < Double.parseDouble(temp.getValue().toString())) output.remove(drink);
           }
           break;
         case "maxPrice":
           for (Drink drink : drinkList) {
-            if (drink.getPrice() > Double.parseDouble(temp.getValue().toString())) {
-              output.remove(drink);
-            }
+            if (drink.getPrice() > Double.parseDouble(temp.getValue().toString())) output.remove(drink);
           }
           break;
         case "maxAmount":
           for (Drink drink : drinkList) {
-            if (drink.getAmount() > Integer.parseInt(temp.getValue().toString())) {
-              output.remove(drink);
-            }
+            if (drink.getAmount() > Integer.parseInt(temp.getValue().toString())) output.remove(drink);
           }
           break;
         case "minAmount":
           for (Drink drink : drinkList) {
-            if (drink.getAmount() < Integer.parseInt(temp.getValue().toString())) {
-              output.remove(drink);
-            }
+            if (drink.getAmount() < Integer.parseInt(temp.getValue().toString())) output.remove(drink);
           }
           break;
         case "name":
           for (Drink drink : drinkList) {
-            if (!drink.getName().toLowerCase().contains(temp.getValue().toString().toLowerCase())) {
-              output.remove(drink);
-            }
+            if (!drink.getName().toLowerCase().contains(temp.getValue().toString().toLowerCase())) output.remove(drink);
           }
           break;
       }
