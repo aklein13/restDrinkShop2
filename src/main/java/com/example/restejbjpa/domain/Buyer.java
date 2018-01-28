@@ -1,19 +1,23 @@
 package com.example.restejbjpa.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @XmlRootElement
 public class Buyer {
 
-  private long id;
-  private String firstName;
-  private String lastName;
-  private int age;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public long id;
+  public String firstName;
+  public String lastName;
+  public int age;
+
+  @ManyToMany(mappedBy = "buyers", fetch = FetchType.EAGER)
+  public List<Drink> drinks = new ArrayList<>();
 
   public Buyer(String firstName, String lastName, int age) {
     this.firstName = firstName;
@@ -21,12 +25,10 @@ public class Buyer {
     this.age = age;
   }
 
-  public Buyer(){
+  public Buyer() {
     super();
   }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public long getId() {
     return id;
   }
@@ -58,4 +60,22 @@ public class Buyer {
   public void setAge(int age) {
     this.age = age;
   }
+
+//  TODO workaround for recursion here?
+  public List<Drink> getDrinks() {
+    return null;
+  }
+
+  public List<Drink> listDrinks() {
+    return drinks;
+  }
+
+  public void setDrinks(List<Drink> drinks) {
+    this.drinks = drinks;
+  }
+
+//  public void addDrinks(List<Drink> drinks) {
+//    this.setDrinks(drinks);
+//    for (Drink drink : drinks) drink.getBuyers().add(this);
+//  }
 }

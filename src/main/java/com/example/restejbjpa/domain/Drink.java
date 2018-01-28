@@ -7,75 +7,85 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "drink.all", query = "Select g from Drink g"),
-        @NamedQuery(name = "drink.deleteAll", query = "Delete from Drink")}
+    @NamedQuery(name = "drink.all", query = "Select g from Drink g"),
+    @NamedQuery(name = "drink.deleteAll", query = "Delete from Drink")}
 //        @NamedQuery(name = "drink.findByYor", query = "Select b from Drink b where b.yearOfRelease = :yearOfRelease")}
-        //	@NamedQuery(name = "drink.findByOwner",
+    //	@NamedQuery(name = "drink.findByOwner",
 //	query = "Select a.firstName, a.lastName, b.name from Drink b JOIN b.buyer a where a.firstName = :firstName")
 //	}
 )
 @XmlRootElement
 public class Drink {
 
-    private String Name = "";
-    private double Price;
-    private int Amount;
-    private int id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public int id;
+  public String name = "";
+  public double price;
+  public int amount;
 
-    private Company company;
-    private List<Buyer> buyer;
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  public Company company;
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+  @JoinTable(name = "buyer_drink",
+      joinColumns = @JoinColumn(name="drink_id"),
+      inverseJoinColumns = @JoinColumn(name = "buyer_id")
+  )
+  public List<Buyer> buyers;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public Company getCompany() {
-        return company;
+  public Company getCompany() {
+    return company;
+  }
+
+  public void setCompany(Company company) {
+    this.company = company;
+  }
+
+  public List<Buyer> getBuyers() {
+    return buyers;
+  }
+
+  public void setBuyers(List<Buyer> buyer) {
+    this.buyers = buyer;
+  }
+
+  public void addBuyers(List<Buyer> buyers) {
+    this.setBuyers(buyers);
+    for (Buyer buyer : buyers) {
+      buyer.listDrinks().add(this);
     }
+  }
 
-    public void setCompany(Company company) {
-        this.company = company;
-    }
+  public String getName() {
+    return name;
+  }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public List<Buyer> getBuyer() {
-        return buyer;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setBuyer(List<Buyer> buyer) {
-        this.buyer = buyer;
-    }
+  public double getPrice() {
+    return price;
+  }
 
+  public void setPrice(double price) {
+    this.price = price;
+  }
 
-    public String getName() {
-        return Name;
-    }
+  public int getAmount() {
+    return amount;
+  }
 
-    public void setName(String name) {
-        this.Name = name;
-    }
+  public void setAmount(int amount) {
+    this.amount = amount;
+  }
 
-    public double getPrice() {
-        return Price;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public void setPrice(double price) {
-        this.Price = price;
-    }
-
-    public int getAmount() {
-        return Amount;
-    }
-
-    public void setAmount(int amount) {
-        this.Amount = amount;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
 }

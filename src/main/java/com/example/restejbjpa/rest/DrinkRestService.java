@@ -65,17 +65,16 @@ public class DrinkRestService {
   public Drink addDrink(Drink drink) {
 
     Company comp = new Company("Coca-Cola", "USA");
-    List<Buyer> buyer = new ArrayList<>();
+    List<Buyer> buyers = new ArrayList<>();
 
     Buyer o1 = new Buyer("Karol", "Karolowski", 20);
     Buyer o2 = new Buyer("Borzydar", "Darowski", 22);
 
-    buyer.add(o1);
-    buyer.add(o2);
+    buyers.add(o1);
+    buyers.add(o2);
 
     drink.setCompany(comp);
-//    drink.setGameNumber(gn);
-//    drink.setBuyer(buyer);
+    drink.addBuyers(buyers);
 
     dm.addDrink(drink);
 
