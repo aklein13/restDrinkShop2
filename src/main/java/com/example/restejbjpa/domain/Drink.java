@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "drink.deleteAll", query = "Delete from Drink"),
     @NamedQuery(name = "drink.findByName", query = "Select d from Drink d where d.name = :name"),
     @NamedQuery(name = "drink.findByCompany",
-        query = "Select c.name, d.name from Drink d JOIN d.company c where c.name = :name"),
+        query = "Select d from Drink d JOIN d.company c where c.name = :name"),
 }
 )
 @XmlRootElement

@@ -23,11 +23,6 @@ public class DrinkManager {
     return em.find(Drink.class, id);
   }
 
-//    @SuppressWarnings("unchecked")
-//    public List<Object[]> getGamesOfOwnerByOwnerName(String firstName) {
-//        return em.createNamedQuery("drink.findByOwner").setParameter("firstName", firstName).getResultList();
-//    }
-
   @SuppressWarnings("unchecked")
   public List<Drink> getAll() {
     return em.createNamedQuery("drink.all").getResultList();
@@ -82,19 +77,16 @@ public class DrinkManager {
       }
     }
     return output;
-//    Double minPrice = Double.parseDouble(request.get("minPrice") == null ? "0.0" : request.get("minPrice").toString());
-//    List<Drink> outputList = new ArrayList<>();
-//    for (Drink drink : drinkList) {
-//      if (drink.getPrice() > minPrice) {
-//        outputList.add(drink);
-//      }
-//    }
-//    return outputList;
   }
 
   @SuppressWarnings("unchecked")
   public List<Drink> findByName(String name){
     return em.createNamedQuery("drink.findByName").setParameter("name", name).getResultList();
+  }
+
+  @SuppressWarnings("unchecked")
+  public List<Drink> findByCompany(String name){
+    return em.createNamedQuery("drink.findByCompany").setParameter("name", name).getResultList();
   }
 
   public Boolean deleteDrink(int id) {

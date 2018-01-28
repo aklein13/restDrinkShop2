@@ -41,29 +41,12 @@ public class DrinkRestService {
     return dm.findByName(name);
   }
 
-//	@GET
-//	@Path("/query/game.findByOwner/{firstName}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response getOwnerGames(@PathParam("firstName") String firstName){
-//
-//		List<Object[]> rawGames = dm.getGamesOfOwnerByOwnerName(firstName);
-//		JsonArrayBuilder games = Json.createArrayBuilder();
-//
-//		for(Object[] rawGame: rawGames){
-//
-//			String fName = (String) rawGame[0];
-//			String lName = (String) rawGame[1];
-//			String title = (String) rawGame[2];
-//
-//			games.add(Json.createObjectBuilder()
-//					.add("firstName", fName)
-//					.add("lastName", lName)
-//					.add("title", title));
-//		}
-//
-//		JsonObject json =  Json.createObjectBuilder().add("result", games).build();
-//		return Response.ok(json, MediaType.APPLICATION_JSON).build();
-//	}
+  @GET
+  @Path("/query/findByCompany/{name}")
+  @Produces(MediaType.APPLICATION_JSON)
+  public List<Drink> getDrinkByCompanyName(@PathParam("name") String name) {
+    return dm.findByCompany(name);
+  }
 
 
   @GET

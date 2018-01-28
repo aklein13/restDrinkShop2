@@ -23,6 +23,7 @@ import java.util.List;
 public class DrinkRestTest {
 
   private static final String NAME = "Fanta";
+  private static final String NAME1 = "Mirinda";
   private static final String NAME2 = "Sprite";
   private static final String NAME3 = "Cola";
   private static final String COUNTRY = "Fanta";
@@ -110,6 +111,20 @@ public class DrinkRestTest {
     ValidatableResponse response = get("/drink/query/name/" + NAME).then();
     response.assertThat().statusCode(200);
     response.body("[0].name", equalTo(NAME));
+  }
+
+  @Test
+  public void searchByCompanyName() {
+    clearDrinks();
+    Company c1 = new Company(NAME1, COUNTRY);
+    Company c2 = new Company(NAME2, COUNTRY);
+    Drink d1 = new Drink(NAME, PRICE, AMOUNT, c1, null);
+    Drink d2 = new Drink(NAME, PRICE, AMOUNT, c2, null);
+    sendDrink(d2);
+    sendDrink(d1);
+    ValidatableResponse response = get("/drink/query/findByCompany/" + NAME1).then();
+    response.assertThat().statusCode(200);
+    response.body("[0].company.name", equalTo(NAME1));
   }
 
 }
