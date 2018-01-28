@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
         @NamedQuery(name = "drink.deleteAll", query = "Delete from Drink")}
 //        @NamedQuery(name = "drink.findByYor", query = "Select b from Drink b where b.yearOfRelease = :yearOfRelease")}
         //	@NamedQuery(name = "drink.findByOwner",
-//	query = "Select a.firstName, a.lastName, b.name from Drink b JOIN b.owner a where a.firstName = :firstName")
+//	query = "Select a.firstName, a.lastName, b.name from Drink b JOIN b.buyer a where a.firstName = :firstName")
 //	}
 )
 @XmlRootElement
@@ -23,7 +23,7 @@ public class Drink {
     private int id;
 
     private Company company;
-    private List<Owner> owner;
+    private List<Buyer> buyer;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Company getCompany() {
@@ -35,12 +35,12 @@ public class Drink {
     }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public List<Owner> getOwner() {
-        return owner;
+    public List<Buyer> getBuyer() {
+        return buyer;
     }
 
-    public void setOwner(List<Owner> owner) {
-        this.owner = owner;
+    public void setBuyer(List<Buyer> buyer) {
+        this.buyer = buyer;
     }
 
 

@@ -19,7 +19,7 @@ public class DrinkRestService {
   DrinkManager dm;
 
 //	@EJB
-//  OwnerManager om;
+//  BuyerMenager om;
 //
 //	@EJB
 //  GameNumberManager gnm;
@@ -65,17 +65,17 @@ public class DrinkRestService {
   public Drink addDrink(Drink drink) {
 
     Company comp = new Company("Coca-Cola", "USA");
-    List<Owner> owner = new ArrayList<>();
+    List<Buyer> buyer = new ArrayList<>();
 
-    Owner o1 = new Owner("Karol", "Karolowski", 20);
-    Owner o2 = new Owner("Borzydar", "Darowski", 22);
+    Buyer o1 = new Buyer("Karol", "Karolowski", 20);
+    Buyer o2 = new Buyer("Borzydar", "Darowski", 22);
 
-    owner.add(o1);
-    owner.add(o2);
+    buyer.add(o1);
+    buyer.add(o2);
 
     drink.setCompany(comp);
 //    drink.setGameNumber(gn);
-//    drink.setOwner(owner);
+//    drink.setBuyer(buyer);
 
     dm.addDrink(drink);
 
