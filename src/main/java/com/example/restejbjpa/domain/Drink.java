@@ -52,6 +52,14 @@ public class Drink {
     }
   }
 
+  public Drink(String name, double price, int amount, Company company, List<Buyer> buyers) {
+    this.name = name;
+    this.price = price;
+    this.amount = amount;
+    this.company = company;
+    this.buyers = buyers;
+  }
+
   public String getName() {
     return name;
   }
