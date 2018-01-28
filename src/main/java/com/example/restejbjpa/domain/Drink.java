@@ -7,12 +7,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "drink.all", query = "Select g from Drink g"),
-    @NamedQuery(name = "drink.deleteAll", query = "Delete from Drink")}
-//        @NamedQuery(name = "drink.findByYor", query = "Select b from Drink b where b.yearOfRelease = :yearOfRelease")}
-    //	@NamedQuery(name = "drink.findByOwner",
-//	query = "Select a.firstName, a.lastName, b.name from Drink b JOIN b.buyer a where a.firstName = :firstName")
-//	}
+    @NamedQuery(name = "drink.all", query = "Select d from Drink d"),
+    @NamedQuery(name = "drink.deleteAll", query = "Delete from Drink"),
+    @NamedQuery(name = "drink.findByName", query = "Select d from Drink d where d.name = :name"),
+    @NamedQuery(name = "drink.findByCompany",
+        query = "Select c.name, d.name from Drink d JOIN d.company c where c.name = :name"),
+}
 )
 @XmlRootElement
 public class Drink {

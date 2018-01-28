@@ -18,47 +18,6 @@ public class DrinkRestService {
   @EJB
   DrinkManager dm;
 
-//	@EJB
-//  BuyerMenager om;
-//
-//	@EJB
-//  GameNumberManager gnm;
-//
-//	@EJB
-//  CompanyManager cm;
-
-
-//	@GET
-//	@Path("/manytomany")
-//	@Produces(MediaType.TEXT_PLAIN)
-//	public String testRelations(){
-//
-//		Person p = new Person("Niki", "Lauda", 1945);
-//
-//		Car c1 = new Car("Fiat", "Punto");
-//		Car c2 = new Car("Ford", "Fiesta");
-//
-//		List<Car> cars = new ArrayList<>();
-//		cars.add(c1);
-//		cars.add(c2);
-//
-//		p.addCars(cars);
-//		pm.addPerson(p);
-//
-//
-//		System.out.println("Id c: " + c1.getId());
-//
-//		System.out.println("\n\n@@@ Size of owners: " + c1.getOwners().size());
-//
-//		//Car retrieved = pm.getCar(c1.getId());
-//		//Car retrieved = pm.updateCar(c1);
-//
-//
-//		//System.out.println("\n\n@@@ Size of owners: " + retrieved.getOwners().size());
-//
-//		return "ManyToMany";
-//	}
-
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
@@ -92,12 +51,12 @@ public class DrinkRestService {
   }
 
 
-//  @GET
-//  @Path("/query/yor/{yor}")
-//  @Produces(MediaType.APPLICATION_JSON)
-//  public List<Drink> getGameByYor(@PathParam("yor") int yop) {
-//    return dm.findByYop(yop);
-//  }
+  @GET
+  @Path("/query/name/{name}")
+  @Produces(MediaType.APPLICATION_JSON)
+  public List<Drink> getDrinkByName(@PathParam("name") String name) {
+    return dm.findByName(name);
+  }
 
 //	@GET
 //	@Path("/query/game.findByOwner/{firstName}")

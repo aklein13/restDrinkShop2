@@ -13,7 +13,7 @@ public class Buyer {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public long id;
+  public int id;
   public String firstName;
   public String lastName;
   public int age;
@@ -31,11 +31,11 @@ public class Buyer {
     super();
   }
 
-  public long getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(int id) {
     this.id = id;
   }
 
@@ -63,7 +63,7 @@ public class Buyer {
     this.age = age;
   }
 
-//  workaround for recursion here?
+  //  workaround for recursion here?
   public Set<Integer> getDrinks() {
     Set<Integer> intSet = new HashSet<>();
     for (Drink drink : drinks) intSet.add(drink.id);
@@ -78,8 +78,8 @@ public class Buyer {
     this.drinks = drinks;
   }
 
-//  public void addDrinks(List<Drink> drinks) {
-//    this.setDrinks(drinks);
-//    for (Drink drink : drinks) drink.getBuyers().add(this);
-//  }
+  public void addDrinks(List<Drink> drinks) {
+    this.setDrinks(drinks);
+    for (Drink drink : drinks) drink.getBuyers().add(this);
+  }
 }

@@ -9,21 +9,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Company {
 
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   private String name;
   private String country;
 
-  public Company(){
+  public Company() {
     super();
   }
 
-  public Company(String name, String country){
+  public Company(String name, String country) {
     this.name = name;
     this.country = country;
   }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public int getId() {
     return id;
   }

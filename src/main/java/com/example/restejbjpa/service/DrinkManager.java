@@ -92,6 +92,11 @@ public class DrinkManager {
 //    return outputList;
   }
 
+  @SuppressWarnings("unchecked")
+  public List<Drink> findByName(String name){
+    return em.createNamedQuery("drink.findByName").setParameter("name", name).getResultList();
+  }
+
   public Boolean deleteDrink(int id) {
     Drink drink = em.find(Drink.class, id);
     if (drink == null) {
