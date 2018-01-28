@@ -23,6 +23,16 @@ public class DrinkManager {
     return em.find(Drink.class, id);
   }
 
+  public List<Drink> init (){
+    Drink d1 = new Drink("Pepsi", 5.5, 10);
+    Drink d2 = new Drink("Sprite", 15.1, 100);
+    Drink d3 = new Drink("Cola", 21.3, 5);
+    addDrink(d1);
+    addDrink(d2);
+    addDrink(d3);
+    return getAll();
+  }
+
   @SuppressWarnings("unchecked")
   public List<Drink> getAll() {
     return em.createNamedQuery("drink.all").getResultList();
@@ -31,9 +41,7 @@ public class DrinkManager {
   @SuppressWarnings("unchecked")
   public List<Drink> getWithFilters(Map request) {
     List<Drink> drinkList = em.createNamedQuery("drink.all").getResultList();
-    if (drinkList.size() == 0 || request.isEmpty()) {
-      return null;
-    }
+    if (drinkList.size() == 0 || request.isEmpty()) return null;
     List<Drink> output = drinkList;
     for (Object filter : request.entrySet()) {
       Map.Entry temp = (Map.Entry) filter;
@@ -91,9 +99,7 @@ public class DrinkManager {
 
   public Boolean deleteDrink(int id) {
     Drink drink = em.find(Drink.class, id);
-    if (drink == null) {
-      return false;
-    }
+    if (drink == null) return false;
     em.remove(drink);
     return true;
   }

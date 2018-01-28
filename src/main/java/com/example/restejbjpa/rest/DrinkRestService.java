@@ -77,4 +77,11 @@ public class DrinkRestService {
     return Response.status(Response.Status.NOT_FOUND).build();
   }
 
+  @POST
+  @Path("/init")
+  @Produces(MediaType.APPLICATION_JSON)
+  public List<Drink> init() {
+    return dm.init();
+  }
+
 }
