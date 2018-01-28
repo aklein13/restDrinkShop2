@@ -3,7 +3,9 @@ package com.example.restejbjpa.domain;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @XmlRootElement
@@ -61,9 +63,11 @@ public class Buyer {
     this.age = age;
   }
 
-//  TODO workaround for recursion here?
-  public List<Drink> getDrinks() {
-    return null;
+//  workaround for recursion here?
+  public Set<Integer> getDrinks() {
+    Set<Integer> intSet = new HashSet<>();
+    for (Drink drink : drinks) intSet.add(drink.id);
+    return intSet;
   }
 
   public List<Drink> listDrinks() {

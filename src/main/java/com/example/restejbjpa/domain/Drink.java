@@ -26,11 +26,7 @@ public class Drink {
 
   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   public Company company;
-  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-  @JoinTable(name = "buyer_drink",
-      joinColumns = @JoinColumn(name="drink_id"),
-      inverseJoinColumns = @JoinColumn(name = "buyer_id")
-  )
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   public List<Buyer> buyers;
 
   public Company getCompany() {
