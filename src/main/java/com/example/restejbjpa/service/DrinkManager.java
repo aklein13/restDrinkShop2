@@ -104,7 +104,7 @@ public class DrinkManager {
     return true;
   }
 
-  public void deletAll() {
+  public void deleteAll() {
     em.createNamedQuery("drink.deleteAll").executeUpdate();
   }
 

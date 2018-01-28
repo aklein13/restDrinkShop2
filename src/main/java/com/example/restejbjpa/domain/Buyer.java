@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "buyer.all", query = "Select b from Buyer b"),
+    @NamedQuery(name = "buyer.deleteAll", query = "Delete from Buyer "),
+}
+)
 @XmlRootElement
 public class Buyer {
 
@@ -20,6 +25,13 @@ public class Buyer {
 
   @ManyToMany(mappedBy = "buyers", fetch = FetchType.EAGER)
   public List<Drink> drinks = new ArrayList<>();
+
+  public Buyer(String firstName, String lastName, int age, List<Drink> drinks) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    addDrinks(drinks);
+  }
 
   public Buyer(String firstName, String lastName, int age) {
     this.firstName = firstName;

@@ -5,6 +5,11 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "company.all", query = "Select c from Company c"),
+    @NamedQuery(name = "company.deleteAll", query = "Delete from Company "),
+}
+)
 @XmlRootElement
 public class Company {
 

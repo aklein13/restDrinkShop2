@@ -1,6 +1,5 @@
 package com.example.restejbjpa.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,24 +63,20 @@ public class DrinkRestService {
 
   @DELETE
   public Response deleteAll() {
-    dm.deletAll();
+    dm.deleteAll();
     return Response.status(Response.Status.OK).build();
   }
 
   @DELETE
   @Path("/{id}")
   public Response deleteDrink(@PathParam("id") int drinkId) {
-    if (dm.deleteDrink(drinkId)) {
-      return Response.status(Response.Status.OK).build();
-    }
+    if (dm.deleteDrink(drinkId)) return Response.status(Response.Status.OK).build();
     return Response.status(Response.Status.NOT_FOUND).build();
   }
 
   @POST
   @Path("/init")
   @Produces(MediaType.APPLICATION_JSON)
-  public List<Drink> init() {
-    return dm.init();
-  }
+  public List<Drink> init() { return dm.init(); }
 
 }
