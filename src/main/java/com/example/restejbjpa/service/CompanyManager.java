@@ -1,7 +1,6 @@
 package com.example.restejbjpa.service;
 
 import com.example.restejbjpa.domain.Company;
-import com.example.restejbjpa.domain.Drink;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

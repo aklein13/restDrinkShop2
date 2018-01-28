@@ -8,8 +8,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.example.restejbjpa.domain.Buyer;
-import com.example.restejbjpa.domain.Company;
 import com.example.restejbjpa.domain.Drink;
 
 @Stateless
@@ -45,7 +43,7 @@ public class DrinkManager {
   public List<Drink> getWithFilters(Map request) {
     List<Drink> drinkList = em.createNamedQuery("drink.all").getResultList();
     if (drinkList.size() == 0 || request.isEmpty()) return null;
-    List<Drink> output = drinkList;
+    List<Drink> output = new ArrayList<>(drinkList);
     for (Object filter : request.entrySet()) {
       Map.Entry temp = (Map.Entry) filter;
       System.out.println(temp.getKey().toString());
