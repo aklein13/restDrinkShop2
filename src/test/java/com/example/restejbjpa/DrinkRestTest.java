@@ -61,6 +61,12 @@ public class DrinkRestTest {
     Drink d1 = new Drink(NAME, PRICE, AMOUNT);
     sendDrink(d1);
     assertEquals(1, getSize());
+    get("/drink/-1").then().assertThat().statusCode(404);
+    ValidatableResponse response = get("/drink").then();
+    response.assertThat().statusCode(200);
+    response.body("[0].name", equalTo(NAME),
+        "[0].amount", equalTo(AMOUNT)
+    );
   }
 
   @Test
