@@ -26,8 +26,18 @@ public class Drink {
 
   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   public Company company;
+
+  public Drink(String name, double price, int amount) {
+    this.name = name;
+    this.price = price;
+    this.amount = amount;
+  }
+
   @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   public List<Buyer> buyers;
+
+  public Drink() {
+  }
 
   public Company getCompany() {
     return company;

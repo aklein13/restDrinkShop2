@@ -22,21 +22,7 @@ public class DrinkRestService {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Drink addDrink(Drink drink) {
-
-    Company comp = new Company("Coca-Cola", "USA");
-    List<Buyer> buyers = new ArrayList<>();
-
-    Buyer o1 = new Buyer("Karol", "Karolowski", 20);
-    Buyer o2 = new Buyer("Borzydar", "Darowski", 22);
-
-    buyers.add(o1);
-    buyers.add(o2);
-
-    drink.setCompany(comp);
-    drink.addBuyers(buyers);
-
     dm.addDrink(drink);
-
     return drink;
   }
 
@@ -44,9 +30,6 @@ public class DrinkRestService {
   @Path("/{id}")
   @Produces(MediaType.APPLICATION_JSON)
   public Drink getDrink(@PathParam("id") int id) {
-
-    //Drink retrieved = gm.getDrink(id);
-
     return dm.getDrink(id);
   }
 
@@ -97,7 +80,7 @@ public class DrinkRestService {
   }
 
   @DELETE
-  public Response deletAll() {
+  public Response deleteAll() {
     dm.deletAll();
     return Response.status(Response.Status.OK).build();
   }
