@@ -1,5 +1,6 @@
 package com.example.restejbjpa.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.example.restejbjpa.domain.Buyer;
+import com.example.restejbjpa.domain.Company;
 import com.example.restejbjpa.domain.Drink;
 
 @Stateless
@@ -23,10 +26,17 @@ public class DrinkManager {
     return em.find(Drink.class, id);
   }
 
-  public List<Drink> init (){
-    Drink d1 = new Drink("Pepsi", 5.5, 10);
-    Drink d2 = new Drink("Sprite", 15.1, 100);
-    Drink d3 = new Drink("Cola", 21.3, 5);
+  public List<Drink> init() {
+    List<Buyer> buyers = new ArrayList<>();
+    Company c1 = new Company("Pepsi Company", "USA");
+    Company c2 = new Company("Koca-Kola", "China");
+    Buyer b1 = new Buyer("Stefan", "Kowalski", 22);
+    Buyer b2 = new Buyer("Stefan", "Nowak", 20);
+    buyers.add(b1);
+    buyers.add(b2);
+    Drink d1 = new Drink("Pepsi", 5.5, 10, c1, b1);
+    Drink d2 = new Drink("Sprite", 15.1, 100, c2, buyers);
+    Drink d3 = new Drink("Cola", 21.3, 5, c2, b2);
     addDrink(d1);
     addDrink(d2);
     addDrink(d3);
@@ -88,12 +98,12 @@ public class DrinkManager {
   }
 
   @SuppressWarnings("unchecked")
-  public List<Drink> findByName(String name){
+  public List<Drink> findByName(String name) {
     return em.createNamedQuery("drink.findByName").setParameter("name", name).getResultList();
   }
 
   @SuppressWarnings("unchecked")
-  public List<Drink> findByCompany(String name){
+  public List<Drink> findByCompany(String name) {
     return em.createNamedQuery("drink.findByCompany").setParameter("name", name).getResultList();
   }
 

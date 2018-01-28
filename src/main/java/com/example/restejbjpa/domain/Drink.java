@@ -1,5 +1,6 @@
 package com.example.restejbjpa.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -27,16 +28,41 @@ public class Drink {
   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   public Company company;
 
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  public List<Buyer> buyers;
+
+  public Drink() {
+  }
+
   public Drink(String name, double price, int amount) {
     this.name = name;
     this.price = price;
     this.amount = amount;
   }
 
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  public List<Buyer> buyers;
+  public Drink(String name, double price, int amount, Company company) {
+    this.name = name;
+    this.price = price;
+    this.amount = amount;
+    this.company = company;
+  }
 
-  public Drink() {
+  public Drink(String name, double price, int amount, Company company, List<Buyer> buyers) {
+    this.name = name;
+    this.price = price;
+    this.amount = amount;
+    this.company = company;
+    this.buyers = buyers;
+  }
+
+  public Drink(String name, double price, int amount, Company company, Buyer buyer) {
+    this.name = name;
+    this.price = price;
+    this.amount = amount;
+    this.company = company;
+    List<Buyer> buyers = new ArrayList<>();
+    buyers.add(buyer);
+    this.buyers = buyers;
   }
 
   public Company getCompany() {
@@ -60,14 +86,6 @@ public class Drink {
     for (Buyer buyer : buyers) {
       buyer.listDrinks().add(this);
     }
-  }
-
-  public Drink(String name, double price, int amount, Company company, List<Buyer> buyers) {
-    this.name = name;
-    this.price = price;
-    this.amount = amount;
-    this.company = company;
-    this.buyers = buyers;
   }
 
   public String getName() {
