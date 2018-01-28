@@ -30,7 +30,7 @@ public class Buyer {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
-    addDrinks(drinks);
+    this.drinks = drinks;
   }
 
   public Buyer(String firstName, String lastName, int age) {

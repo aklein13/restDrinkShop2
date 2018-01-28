@@ -67,7 +67,7 @@ public class Drink {
     this.price = price;
     this.amount = amount;
     this.company = company;
-    addBuyers(buyers);
+    this.buyers = buyers;
   }
 
   public String getName() {

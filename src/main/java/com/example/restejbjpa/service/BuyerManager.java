@@ -2,10 +2,12 @@ package com.example.restejbjpa.service;
 
 import com.example.restejbjpa.domain.Buyer;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@Stateless
 public class BuyerManager {
   @PersistenceContext
   EntityManager em;

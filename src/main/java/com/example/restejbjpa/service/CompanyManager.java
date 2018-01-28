@@ -2,10 +2,12 @@ package com.example.restejbjpa.service;
 
 import com.example.restejbjpa.domain.Company;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@Stateless
 public class CompanyManager {
   @PersistenceContext
   EntityManager em;

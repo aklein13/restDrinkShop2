@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Company {
 
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
